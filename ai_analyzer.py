@@ -19,7 +19,7 @@ def analyze_product(client: anthropic.Anthropic, page_data: dict):
     prompt = ANALYSIS_PROMPT.format(page_content=page_content)
 
     with client.messages.stream(
-        model="claude-sonnet-4-6",
+        model="claude-haiku-4-5",
         max_tokens=4096,
         messages=[{"role": "user", "content": prompt}],
     ) as stream:
@@ -35,7 +35,7 @@ def generate_proposal(client: anthropic.Anthropic, analysis: str, company_name: 
     )
 
     with client.messages.stream(
-        model="claude-sonnet-4-6",
+        model="claude-haiku-4-5",
         max_tokens=4096,
         messages=[{"role": "user", "content": prompt}],
     ) as stream:
