@@ -45,23 +45,27 @@ st.markdown("""
 </style>
 """, unsafe_allow_html=True)
 
-# --- 사이드바: API 키 ---
+# --- API 키 로드 (Secrets 우선, 없으면 수동 입력) ---
+api_key = st.secrets.get("ANTHROPIC_API_KEY", "")
+
 with st.sidebar:
     st.header("설정")
-    api_key = st.text_input(
-        "Claude API Key",
-        type="password",
-        placeholder="sk-ant-...",
-        help="Anthropic에서 발급받은 API 키를 입력하세요.",
-    )
+    if api_key:
+        st.success("API Key 설정됨 (Secrets)")
+    else:
+        api_key = st.text_input(
+            "Claude API Key",
+            type="password",
+            placeholder="sk-ant-...",
+            help="Anthropic에서 발급받은 API 키를 입력하세요.",
+        )
     st.divider()
     st.markdown("### 사용 안내")
     st.markdown("""
-1. Claude API Key를 입력하세요
-2. 발신자명을 입력하세요
-3. 자사몰 랜딩페이지 URL을 붙여넣으세요
-4. **제안서 생성하기** 버튼을 클릭하세요
-5. 분석 완료 후 제안서를 복사해 사용하세요
+1. 발신자명을 입력하세요
+2. 자사몰 랜딩페이지 URL을 붙여넣으세요
+3. **제안서 생성하기** 버튼을 클릭하세요
+4. 분석 완료 후 제안서를 복사해 사용하세요
     """)
     st.divider()
     st.caption("Powered by Claude API")
