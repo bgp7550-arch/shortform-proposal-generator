@@ -62,7 +62,7 @@ with st.sidebar:
     st.divider()
     st.markdown("### 사용 안내")
     st.markdown("""
-1. 발신자명을 입력하세요
+1. 회사명을 입력하세요
 2. 자사몰 랜딩페이지 URL을 붙여넣으세요
 3. **제안서 생성하기** 버튼을 클릭하세요
 4. 분석 완료 후 제안서를 복사해 사용하세요
@@ -81,10 +81,10 @@ st.divider()
 
 col1, col2 = st.columns([1, 1])
 with col1:
-    sender_name = st.text_input(
-        "✍️ 발신자명",
-        placeholder="예: 홍길동",
-        help="제안 이메일 하단에 들어갈 발신자 이름",
+    company_name = st.text_input(
+        "✍️ 회사명",
+        placeholder="예: 마케팅치트키",
+        help="제안 이메일에 들어갈 회사명",
     )
 with col2:
     url = st.text_input(
@@ -103,8 +103,8 @@ if generate:
     if not url:
         st.error("랜딩페이지 URL을 입력해주세요.")
         st.stop()
-    if not sender_name:
-        st.error("발신자명을 입력해주세요.")
+    if not company_name:
+        st.error("회사명을 입력해주세요.")
         st.stop()
 
     client = create_client(api_key)
@@ -147,7 +147,7 @@ if generate:
         proposal_placeholder = st.empty()
         proposal_text = ""
         try:
-            for chunk in generate_proposal(client, analysis_text, sender_name):
+            for chunk in generate_proposal(client, analysis_text, company_name):
                 proposal_text += chunk
                 proposal_placeholder.markdown(proposal_text)
         except Exception as e:

@@ -27,11 +27,11 @@ def analyze_product(client: anthropic.Anthropic, page_data: dict):
             yield text
 
 
-def generate_proposal(client: anthropic.Anthropic, analysis: str, sender_name: str):
+def generate_proposal(client: anthropic.Anthropic, analysis: str, company_name: str):
     """2차 분석: 영업 제안 이메일 생성 (스트리밍)"""
     prompt = PROPOSAL_PROMPT.format(
         analysis=analysis,
-        sender_name=sender_name,
+        company_name=company_name,
     )
 
     with client.messages.stream(
