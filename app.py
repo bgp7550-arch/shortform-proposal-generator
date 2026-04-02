@@ -83,7 +83,7 @@ col1, col2 = st.columns([1, 1])
 with col1:
     company_name = st.text_input(
         "✍️ 회사명",
-        placeholder="예: 마케팅치트키",
+        placeholder="예: 콘파남",
         help="제안 이메일에 들어갈 회사명",
     )
 with col2:
